@@ -1,0 +1,42 @@
+before_script:
+ - apt-get update -qq && apt-get install -y -qq sshpass
+
+stages:
+    - build
+    #- test
+    - deploy
+
+
+build:
+  stage: build
+  tags:
+    - shell
+  script:
+    - php bin/console cache:clear #nettoyage cache
+    - php bin/console cache:clear --env=prod #nettoyage cache env prod
+
+#build:
+# stage: test
+# tages:
+#  - shell
+# script:
+#  - php bin/console security:check
+
+deploy:
+  stage: deploy
+  tags:
+    - shell
+  script:
+    - echo "update DataBase"
+    - php bin/console doctrine:schema:update --force
+    - echo "Deploy to prod server!"
+    - cd ..
+    - sshpass -V
+    - export SSHPASS=$USER_PASS 
+    - sshpass -e scp -o stricthostkeychecking=no -r ecommerce-back cicdUser@eyolon.fr:/var/www/html
+
+  environment:
+    name: staging
+    url: http://hardweird.eyolon.fr
+  only:
+  - master

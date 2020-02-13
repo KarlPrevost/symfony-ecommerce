@@ -1,0 +1,19 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+app_pocSymfony_poc1:
+    path: /pocSymfony/poc1
+    controller: App\Controller\PocSymfonyController::poc1
+
+app_pocSymfony_poc1bis:
+    path: /pocSymfony/poc1bis
+    controller: App\Controller\PocSymfonyController::poc1bis
+
+app_pocSymfony_poc1bis2:
+    path: /pocSymfony/poc1bis2
+    controller: App\Controller\PocSymfonyController::poc1bis2
+    
+app_pocSymfony_poc1bis3:
+    path: /pocSymfony/poc1bis3
+    controller: App\Controller\PocSymfonyController::poc1bis3
+
